@@ -1,0 +1,12 @@
+{
+  "files.exclude": {
+    "**/node_modules": true,
+    "pnpm-lock.yaml": true,
+  },
+  "symbols.folders.associations": {
+    ".vscode": "folder-gray",
+    "api": "folder-red",
+    "web": "folder-sky",
+    "shared": "folder-helpers",
+  },
+}

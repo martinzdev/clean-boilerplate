@@ -1,0 +1,25 @@
+{
+  "name": "barbafeita",
+  "version": "1.0.0",
+  "license": "MIT",
+  "packageManager": "pnpm@10.0.0",
+  "scripts": {
+    "start": "turbo start",
+    "start:build": "turbo build",
+    "start:dev": "turbo dev",
+    "db:generate": "turbo db:generate",
+    "db:migrate": "prisma db:migrate",
+    "db:seed": "prisma db:seed",
+    "test": "pnpm --filter server test",
+    "test:watch": "pnpm --filter server test:watch",
+    "test:cov": "pnpm --filter server test:cov",
+    "test:debug": "pnpm --filter server test:debug",
+    "test:e2e": "pnpm --filter server test:e2e"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.4"
+  },
+  "workspaces": [
+    "apps/*"
+  ]
+}
