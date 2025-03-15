@@ -1,11 +1,12 @@
 import { EnvService } from "@/infra/env/env.service";
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { z } from "zod";
 
 const tokenPayloadSchema = z.object({
   sub: z.string().uuid(),
+  type: z.enum(["access", "refresh"]),
 });
 
 export type UserPayload = z.infer<typeof tokenPayloadSchema>;
@@ -23,6 +24,23 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: UserPayload) {
-    return tokenPayloadSchema.parse(payload);
+    const validatedPayload = tokenPayloadSchema.parse(payload);
+
+    if (validatedPayload.type !== "access") {
+      throw new UnauthorizedException("Invalid token type");
+    }
+
+    try {
+      // Criar uma nova instância da classe UserPayload
+      const userPayload = {
+        sub: validatedPayload.sub,
+        type: validatedPayload.type,
+      };
+
+      return userPayload;
+    } catch (error) {
+      console.error("JWT Strategy - Validation error:", error);
+      throw new UnauthorizedException("Invalid token payload");
+    }
   }
 }
