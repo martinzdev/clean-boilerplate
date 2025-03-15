@@ -1,7 +1,13 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryColumn,
+  UpdateDateColumn,
+} from "typeorm";
 
 @Entity({ name: "users" })
-export class User {
+export class UserEntity {
   @PrimaryColumn({ type: "uuid" })
   id: string;
 
@@ -13,4 +19,10 @@ export class User {
 
   @Column()
   password: string;
+
+  @CreateDateColumn({ type: "timestamp" })
+  createdAt: Date;
+
+  @UpdateDateColumn({ type: "timestamp", nullable: true })
+  updatedAt?: Date | null;
 }
