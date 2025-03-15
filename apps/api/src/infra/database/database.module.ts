@@ -1,25 +1,16 @@
+import { UserRepository } from "@/modules/identity/application/ports/repositories/user.repository";
+import { TypeOrmUserRepository } from "@/modules/identity/infra/persistence/typeorm/repositories/typeorm-user.repository";
 import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { EnvModule } from "../env/env.module";
-import { EnvService } from "../env/env.service";
+import { TypeOrmConfigModule as TypeOrmModule } from "./typeorm/typeorm.module";
 
 @Module({
-  imports: [
-    TypeOrmModule.forRootAsync({
-      imports: [EnvModule],
-      inject: [EnvService],
-      useFactory(env: EnvService) {
-        const databaseUrl = env.get("DATABASE_URL");
-
-        return {
-          type: "postgres",
-          url: databaseUrl,
-          entities: [__dirname + "/typeorm/**/*.entity{.ts,.js}"],
-          synchronize: true,
-          logging: true,
-        };
-      },
-    }),
+  imports: [TypeOrmModule],
+  providers: [
+    {
+      provide: UserRepository,
+      useClass: TypeOrmUserRepository,
+    },
   ],
+  exports: [UserRepository, TypeOrmModule],
 })
 export class DatabaseModule {}
