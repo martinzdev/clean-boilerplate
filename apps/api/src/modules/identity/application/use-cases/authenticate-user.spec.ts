@@ -30,7 +30,6 @@ describe("Authenticate User", () => {
     await inMemoryUserRepository.save(user);
 
     const result = await sut.execute({
-      name: "John Doe",
       email: "johndoe@gmail.com",
       password: "123456",
     });

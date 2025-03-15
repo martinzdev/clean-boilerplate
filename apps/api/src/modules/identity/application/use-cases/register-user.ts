@@ -1,4 +1,5 @@
 import { Either, left, right } from "@/@shared/core/either";
+import { Injectable } from "@nestjs/common";
 import { User } from "../../domain/entities/user";
 import { UserAlreadyExistsException } from "../exceptions/UserAlreadyExistsException";
 import { UserRepository } from "../ports/repositories/user.repository";
@@ -17,6 +18,7 @@ export type RegisterUserUseCaseResponse = Either<
   }
 >;
 
+@Injectable()
 export class RegisterUserUseCase {
   constructor(
     private readonly userRepository: UserRepository,
@@ -27,7 +29,7 @@ export class RegisterUserUseCase {
     email,
     password,
   }: RegisterUserUseCaseRequest): Promise<RegisterUserUseCaseResponse> {
-    const userWithSameEmail = await this.userRepository.exists(email);
+    const userWithSameEmail = await this.userRepository.exists({ email });
 
     if (userWithSameEmail) {
       return left(new UserAlreadyExistsException(email));

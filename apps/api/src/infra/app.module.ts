@@ -1,3 +1,4 @@
+import { IdentityModules } from "@/modules/identity/infra/main";
 import { Global, MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { DatabaseModule } from "./database/database.module";
@@ -18,6 +19,7 @@ import { LoggerModule } from "./services/logger/logger.module";
     HttpModule,
     LoggerModule,
     DatabaseModule,
+    ...IdentityModules,
   ],
 })
 export class AppModule implements NestModule {

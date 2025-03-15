@@ -1,7 +1,7 @@
-import { UseCaseError } from '@/core/errors/use-case-error'
+import { UseCaseException } from "../use-case-exception";
 
-export class ResourceNotFoundError extends Error implements UseCaseError {
+export class ResourceNotFoundError extends UseCaseException {
   constructor() {
-    super('Resource not found.')
+    super("Resource not found.");
   }
 }

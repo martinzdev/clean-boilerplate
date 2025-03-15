@@ -1,25 +1,22 @@
+import { SessionRepository } from "@/modules/identity/application/ports/repositories/session.repository";
+import { UserRepository } from "@/modules/identity/application/ports/repositories/user.repository";
+import { TypeOrmSessionRepository } from "@/modules/identity/infra/persistence/typeorm/repositories/typeorm-session.repository";
+import { TypeOrmUserRepository } from "@/modules/identity/infra/persistence/typeorm/repositories/typeorm-user.repository";
 import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { EnvModule } from "../env/env.module";
-import { EnvService } from "../env/env.service";
+import { TypeOrmConfigModule as TypeOrmModule } from "./typeorm/typeorm.module";
 
 @Module({
-  imports: [
-    TypeOrmModule.forRootAsync({
-      imports: [EnvModule],
-      inject: [EnvService],
-      useFactory(env: EnvService) {
-        const databaseUrl = env.get("DATABASE_URL");
-
-        return {
-          type: "postgres",
-          url: databaseUrl,
-          entities: [__dirname + "/typeorm/**/*.entity{.ts,.js}"],
-          synchronize: true,
-          logging: true,
-        };
-      },
-    }),
+  imports: [TypeOrmModule],
+  providers: [
+    {
+      provide: UserRepository,
+      useClass: TypeOrmUserRepository,
+    },
+    {
+      provide: SessionRepository,
+      useClass: TypeOrmSessionRepository,
+    },
   ],
+  exports: [UserRepository, SessionRepository, TypeOrmModule],
 })
 export class DatabaseModule {}
