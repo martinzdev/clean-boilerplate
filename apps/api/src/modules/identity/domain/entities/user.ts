@@ -1,5 +1,6 @@
 import { Entity } from "@/@shared/core/entities/entity";
 import { UniqueEntityID } from "@/@shared/core/entities/unique-entity-id";
+import { Optional } from "@/@shared/core/types/optional";
 
 export type UserProps = {
   name: string;
@@ -22,6 +23,14 @@ export class User extends Entity<UserProps> {
     return this.props.password;
   }
 
+  get createdAt() {
+    return this.props.createdAt;
+  }
+
+  get updatedAt() {
+    return this.props.updatedAt;
+  }
+
   set name(name: string) {
     this.props.name = name;
     this.touch();
@@ -41,8 +50,14 @@ export class User extends Entity<UserProps> {
     this.props.updatedAt = new Date();
   }
 
-  static create(props: UserProps, id?: UniqueEntityID) {
-    const user = new User(props, id);
+  static create(props: Optional<UserProps, "createdAt">, id?: UniqueEntityID) {
+    const user = new User(
+      {
+        ...props,
+        createdAt: props.createdAt ?? new Date(),
+      },
+      id
+    );
 
     return user;
   }
