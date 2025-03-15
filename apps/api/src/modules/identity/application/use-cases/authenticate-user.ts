@@ -1,11 +1,11 @@
 import { Either, left, right } from "@/@shared/core/either";
+import { Injectable } from "@nestjs/common";
 import { WrongCredentialsException } from "../exceptions/WrongCredentialsException";
 import { UserRepository } from "../ports/repositories/user.repository";
 import { EncrypterService } from "../ports/services/encrypter-service";
 import { HasherService } from "../ports/services/hasher-service";
 
 export type AuthenticateUserUseCaseRequest = {
-  name: string;
   email: string;
   password: string;
 };
@@ -17,6 +17,7 @@ export type AuthenticateUserUseCaseResponse = Either<
   }
 >;
 
+@Injectable()
 export class AuthenticateUserUseCase {
   constructor(
     private readonly userRepository: UserRepository,
@@ -24,7 +25,6 @@ export class AuthenticateUserUseCase {
     private readonly encrypterService: EncrypterService
   ) {}
   async execute({
-    name,
     email,
     password,
   }: AuthenticateUserUseCaseRequest): Promise<AuthenticateUserUseCaseResponse> {
