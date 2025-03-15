@@ -47,8 +47,13 @@ export class InMemoryUserRepository implements UserRepository {
     return filteredUsers;
   }
 
-  async exists(id: string): Promise<boolean> {
-    return this.users.some((user) => user.id.toString() === id);
+  async exists(filter?: Partial<User>): Promise<boolean> {
+    if (!filter) return false;
+    return this.users.some((user) => {
+      return Object.entries(filter).every(([key, value]) => {
+        return user[key as keyof User] === value;
+      });
+    });
   }
 
   async remove(id: string): Promise<void> {
