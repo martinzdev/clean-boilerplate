@@ -75,12 +75,13 @@ export class Session extends Entity<SessionProps> {
   }
 
   static create(
-    props: Optional<SessionProps, "createdAt">,
+    props: Optional<SessionProps, "isActive" | "createdAt">,
     id?: UniqueEntityID
   ) {
     return new Session(
       {
         ...props,
+        isActive: props.isActive ?? true,
         createdAt: props.createdAt ?? new Date(),
         updatedAt: props.updatedAt ?? null,
       },
