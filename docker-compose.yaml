@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: docker
       POSTGRES_PASSWORD: docker
-      POSTGRES_DB: hotelvest
+      POSTGRES_DB: clean-db
     ports:
       - "5554:5432"
     volumes:
