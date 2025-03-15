@@ -50,6 +50,8 @@ export class AuthenticateUserUseCase {
     const accessToken = await this.encrypterService.encrypt(
       {
         sub: user.id.toString(),
+        type: "access",
+        email: user.email,
       },
       { expiresIn: "1h" }
     );
@@ -62,7 +64,6 @@ export class AuthenticateUserUseCase {
         sub: user.id.toString(),
         type: "refresh",
         email: user.email,
-        name: user.name,
       },
       { expiresIn: "7d" }
     );
