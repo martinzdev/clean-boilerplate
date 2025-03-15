@@ -2,6 +2,7 @@ import { EnvModule } from "@/infra/env/env.module";
 import { EnvService } from "@/infra/env/env.service";
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { SessionEntity } from "./session.entity";
 import { UserEntity } from "./user.entity";
 
 @Module({
@@ -15,13 +16,13 @@ import { UserEntity } from "./user.entity";
         return {
           type: "postgres",
           url: databaseUrl,
-          entities: [UserEntity],
+          entities: [UserEntity, SessionEntity],
           synchronize: true,
           logging: true,
         };
       },
     }),
-    TypeOrmModule.forFeature([UserEntity]),
+    TypeOrmModule.forFeature([UserEntity, SessionEntity]),
   ],
   exports: [TypeOrmModule],
 })
