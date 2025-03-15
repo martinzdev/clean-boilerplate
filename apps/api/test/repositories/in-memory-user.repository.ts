@@ -26,7 +26,7 @@ export class InMemoryUserRepository implements UserRepository {
 
     const user = this.users.find((user) => {
       return Object.entries(filter).every(([key, value]) => {
-        return user[key as keyof User] === value;
+        return user[key as keyof User]?.toString() === value?.toString();
       });
     });
 
@@ -40,7 +40,7 @@ export class InMemoryUserRepository implements UserRepository {
 
     const filteredUsers = this.users.filter((user) => {
       return Object.entries(filter).every(([key, value]) => {
-        return user[key as keyof User] === value;
+        return user[key as keyof User]?.toString() === value?.toString();
       });
     });
 
@@ -51,7 +51,7 @@ export class InMemoryUserRepository implements UserRepository {
     if (!filter) return false;
     return this.users.some((user) => {
       return Object.entries(filter).every(([key, value]) => {
-        return user[key as keyof User] === value;
+        return user[key as keyof User]?.toString() === value?.toString();
       });
     });
   }
