@@ -1,5 +1,5 @@
 import { UniqueEntityID } from "@/@shared/core/entities/unique-entity-id";
-import { UserEntity } from "@/infra/database/typeorm/user.entity";
+import { UserEntity } from "@/infra/database/typeorm/entities/user.entity";
 import { User } from "@/modules/identity/domain/entities/user";
 
 export class TypeOrmUserMapper {

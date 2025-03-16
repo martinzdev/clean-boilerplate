@@ -1,5 +1,5 @@
 import { UniqueEntityID } from "@/@shared/core/entities/unique-entity-id";
-import { SessionEntity } from "@/infra/database/typeorm/session.entity";
+import { SessionEntity } from "@/infra/database/typeorm/entities/session.entity";
 import { Session } from "@/modules/identity/domain/entities/session";
 
 export class TypeOrmSessionMapper {
