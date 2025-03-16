@@ -1,4 +1,4 @@
-import { UserEntity } from "@/infra/database/typeorm/user.entity";
+import { UserEntity } from "@/infra/database/typeorm/entities/user.entity";
 import { UserRepository } from "@/modules/identity/application/ports/repositories/user.repository";
 import { User } from "@/modules/identity/domain/entities/user";
 import { Injectable } from "@nestjs/common";

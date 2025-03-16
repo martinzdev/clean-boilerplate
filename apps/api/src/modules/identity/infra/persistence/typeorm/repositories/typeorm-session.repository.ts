@@ -1,4 +1,4 @@
-import { SessionEntity } from "@/infra/database/typeorm/session.entity";
+import { SessionEntity } from "@/infra/database/typeorm/entities/session.entity";
 import { SessionRepository } from "@/modules/identity/application/ports/repositories/session.repository";
 import { Session } from "@/modules/identity/domain/entities/session";
 import { Injectable } from "@nestjs/common";
