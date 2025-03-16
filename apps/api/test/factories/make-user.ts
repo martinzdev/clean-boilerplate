@@ -1,6 +1,6 @@
 import { UniqueEntityID } from "@/@shared/core/entities/unique-entity-id";
-import { UserEntity } from "@/infra/database/typeorm/entities/user.entity";
 import { User, UserProps } from "@/modules/identity/domain/entities/user";
+import { UserEntity } from "@/modules/identity/infra/persistence/typeorm/entities/user.entity";
 import { TypeOrmUserMapper } from "@/modules/identity/infra/persistence/typeorm/mappers/typeorm-user.mapper";
 import { faker } from "@faker-js/faker";
 import { Injectable } from "@nestjs/common";

@@ -1,14 +1,9 @@
 import { EnvModule } from "@/infra/env/env.module";
-
 import { EnvService } from "@/infra/env/env.service";
-
 import { Module } from "@nestjs/common";
-
 import { TypeOrmModule } from "@nestjs/typeorm";
-
-import { SessionEntity } from "./entities/session.entity";
-
-import { UserEntity } from "./entities/user.entity";
+import { SessionEntity } from "../../../modules/identity/infra/persistence/typeorm/entities/session.entity";
+import { UserEntity } from "../../../modules/identity/infra/persistence/typeorm/entities/user.entity";
 
 @Module({
   imports: [

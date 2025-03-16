@@ -1,6 +1,6 @@
 import { AppModule } from "@/infra/app.module";
 import { DatabaseModule } from "@/infra/database/database.module";
-import { UserEntity } from "@/infra/database/typeorm/entities/user.entity";
+import { UserEntity } from "@/modules/identity/infra/persistence/typeorm/entities/user.entity";
 import { faker } from "@faker-js/faker";
 import { INestApplication } from "@nestjs/common";
 import { Test } from "@nestjs/testing";

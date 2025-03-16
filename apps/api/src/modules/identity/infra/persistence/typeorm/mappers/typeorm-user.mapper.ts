@@ -1,6 +1,6 @@
 import { UniqueEntityID } from "@/@shared/core/entities/unique-entity-id";
-import { UserEntity } from "@/infra/database/typeorm/entities/user.entity";
 import { User } from "@/modules/identity/domain/entities/user";
+import { UserEntity } from "@/modules/identity/infra/persistence/typeorm/entities/user.entity";
 
 export class TypeOrmUserMapper {
   static toDomain(raw: UserEntity): User {

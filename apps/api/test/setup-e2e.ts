@@ -1,7 +1,7 @@
 import { DomainEvents } from "@/@shared/core/events/domain-events";
-import { SessionEntity } from "@/infra/database/typeorm/entities/session.entity";
-import { UserEntity } from "@/infra/database/typeorm/entities/user.entity";
 import { envSchema } from "@/infra/env/env";
+import { SessionEntity } from "@/modules/identity/infra/persistence/typeorm/entities/session.entity";
+import { UserEntity } from "@/modules/identity/infra/persistence/typeorm/entities/user.entity";
 import { randomUUID } from "node:crypto";
 import { DataSource } from "typeorm";
 

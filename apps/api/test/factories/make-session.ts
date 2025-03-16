@@ -1,7 +1,7 @@
 import { UniqueEntityID } from "@/@shared/core/entities/unique-entity-id";
-import { SessionEntity } from "@/infra/database/typeorm/entities/session.entity";
 import { EncrypterService } from "@/modules/identity/application/ports/services/encrypter-service";
 import { Session } from "@/modules/identity/domain/entities/session";
+import { SessionEntity } from "@/modules/identity/infra/persistence/typeorm/entities/session.entity";
 import { TypeOrmSessionMapper } from "@/modules/identity/infra/persistence/typeorm/mappers/typeorm-session.mapper";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
