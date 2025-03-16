@@ -1,6 +1,11 @@
 import { UniqueEntityID } from "@/@shared/core/entities/unique-entity-id";
+import { UserEntity } from "@/infra/database/typeorm/entities/user.entity";
 import { User, UserProps } from "@/modules/identity/domain/entities/user";
+import { TypeOrmUserMapper } from "@/modules/identity/infra/persistence/typeorm/mappers/typeorm-user.mapper";
 import { faker } from "@faker-js/faker";
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
 export function makeUser(
   override: Partial<UserProps> = {},
@@ -17,4 +22,22 @@ export function makeUser(
   );
 
   return user;
+}
+
+@Injectable()
+export class UserFactory {
+  constructor(
+    @InjectRepository(UserEntity)
+    private readonly repository: Repository<UserEntity>
+  ) {}
+
+  async makeTypeOrmUser(data: Partial<UserProps> = {}): Promise<User> {
+    const user = makeUser(data);
+
+    const userEntity = TypeOrmUserMapper.toPersistence(user);
+
+    const savedUser = await this.repository.save(userEntity);
+
+    return TypeOrmUserMapper.toDomain(savedUser);
+  }
 }
