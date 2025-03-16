@@ -4,11 +4,12 @@
 
 # EVENTS
 
-# NOTIFICATIONS
-
 <!-- MODULOS -->
 
 # Identity -> Managment, Authentication
+
+- [x] Testes de unidade
+- [] Testes end to end
 
 # Authorization -> (RABAC)
 
