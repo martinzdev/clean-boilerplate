@@ -14,7 +14,6 @@ export default defineConfig(async () => {
       globals: true,
       root: "./",
     },
-    envDir: "./env",
     plugins: [
       tsConfigPaths(),
       swc.vite({
