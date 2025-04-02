@@ -1,17 +1,17 @@
-version: "3.8"
+# version: "3.8"
 
-services:
-  db:
-    container_name: postgres_database
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: docker
-      POSTGRES_PASSWORD: docker
-      POSTGRES_DB: clean-db
-    ports:
-      - "5554:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+# services:
+#   db:
+#     container_name: postgres_database
+#     image: postgres:latest
+#     environment:
+#       POSTGRES_USER: docker
+#       POSTGRES_PASSWORD: docker
+#       POSTGRES_DB: clean-db
+#     ports:
+#       - "5554:5432"
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
 
-volumes:
-  postgres_data:
+# volumes:
+#   postgres_data:
