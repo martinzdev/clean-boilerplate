@@ -2,20 +2,24 @@ FROM node:20-alpine
 
 WORKDIR /usr/src/app
 
-# Install pnpm
-RUN npm i -g pnpm
+COPY . .
 
-# Install app dependencies
-COPY package.json pnpm-lock.yaml ./
+RUN npm i -g pnpm
 
 RUN pnpm install
 
-# Bundle app source
-COPY . .
+RUN pnpm run db:generate
+RUN pnpm run db:migrate
+RUN pnpm run db:seed
+RUN pnpm run build:turbo
 
-RUN pnpm run build
-
-# API PORT
+# API
 EXPOSE 4444
+# WEB
+EXPOSE 4445
+# POSTGRES
+EXPOSE 5554
+# PRISMA STUDIO
+EXPOSE 5555
 
-CMD ["pnpm", "run", "start"]
+CMD ["pnpm", "run", "start:turbo"]
